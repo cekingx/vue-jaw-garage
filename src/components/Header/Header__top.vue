@@ -11,7 +11,7 @@
 
         <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
           <div class="site-logo">
-            <a href="index.html" class="js-logo-clone">Shoppers</a>
+            <img :src="logo" alt="Jaw Garage">
           </div>
         </div>
 
@@ -48,13 +48,23 @@
 </template>
 
 <script>
+import Logo from "./../../assets/image/logo.png";
+
 export default {
   name: "HeaderTop",
   data: () => {
     return {
-      cartCount: 3
+      cartCount: 3,
+      logo: Logo
     };
   }
 };
 </script>
+
+<style scoped>
+img {
+  max-width: 75%;
+  max-height: 75%;
+}
+</style>
 
