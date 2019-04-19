@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Dashboard from "./views/Dashboard";
+import Home from "../src/components/Home/Home";
+import Cart from "../src/components/Cart/Cart";
 
 Vue.use(Router);
 
@@ -9,9 +10,14 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: "/home",
+      path: "/",
       name: "home",
-      component: Dashboard
+      component: Home
+    },
+    {
+      path: "/cart",
+      name: "cart",
+      component: Cart
     }
   ]
 });

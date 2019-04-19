@@ -4,7 +4,9 @@
       <div class="row align-items-center">
         <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
           <form action class="site-block-top-search">
-            <span class="icon icon-search2"></span>
+            <span class="icon">
+              <font-awesome-icon icon="search"/>
+            </span>
             <input type="text" class="form-control border-0" placeholder="Search">
           </form>
         </div>
@@ -20,23 +22,22 @@
             <ul>
               <li>
                 <a href="#">
-                  <span class="icon icon-person"></span>
+                  <font-awesome-icon icon="user"/>
                 </a>
               </li>
               <li>
-                <a href="#">
-                  <span class="icon icon-heart-o"></span>
-                </a>
-              </li>
-              <li>
-                <a href="cart.html" class="site-cart">
-                  <span class="icon icon-shopping_cart"></span>
-                  <span class="count">{{cartCount}}</span>
-                </a>
+                <router-link to="/cart" class="site-cart">
+                  <span class="icon">
+                    <font-awesome-icon icon="shopping-cart"/>
+                  </span>
+                  <span class="count">{{ cartLength }}</span>
+                </router-link>
               </li>
               <li class="d-inline-block d-md-none ml-md-0">
                 <a href="#" class="site-menu-toggle js-menu-toggle">
-                  <span class="icon-menu"></span>
+                  <span class="icon-menu">
+                    <font-awesome-icon icon="bars"/>
+                  </span>
                 </a>
               </li>
             </ul>
@@ -49,14 +50,25 @@
 
 <script>
 import Logo from "./../../assets/image/logo.png";
+import { mapGetters } from "vuex";
 
 export default {
   name: "HeaderTop",
   data: () => {
     return {
-      cartCount: 3,
+      cartCount: 2,
       logo: Logo
     };
+  },
+  computed: {
+    ...mapGetters({
+      products: "getProducts"
+    }),
+    cartLength() {
+      return this.products.reduce((length, product) => {
+        return length + product.quantity;
+      }, 0);
+    }
   }
 };
 </script>
@@ -67,4 +79,3 @@ img {
   max-height: 75%;
 }
 </style>
-

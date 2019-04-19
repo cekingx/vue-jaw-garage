@@ -3,7 +3,7 @@
     <div class="container">
       <ul class="site-menu js-clone-nav d-none d-md-block">
         <li>
-          <router-link to="/home">Home</router-link>
+          <router-link to="/">Home</router-link>
         </li>
         <li>
           <router-link to="/product">Product</router-link>
