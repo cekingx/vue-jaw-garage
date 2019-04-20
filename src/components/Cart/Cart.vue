@@ -22,7 +22,9 @@
                   :image="product.image"
                   :product="product.product"
                   :price="product.price"
+                  :minus="() => minus(index)"
                   :quantity="product.quantity"
+                  :plus="() => plus(index)"
                   :total="product.total"
                   :remove="() => remove(index)"
                 />
@@ -47,16 +49,13 @@
                   <span class="text-black">Total</span>
                 </div>
                 <div class="col-md-6 text-right">
-                  <strong class="text-black">${{grandTotal}}</strong>
+                  <strong class="text-black">{{grandTotal | currency}}</strong>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-12">
-                  <button
-                    class="btn btn-primary btn-lg py-3 btn-block"
-                    onclick="window.location='checkout.html'"
-                  >Proceed To Checkout</button>
+                  <button class="btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</button>
                 </div>
               </div>
             </div>
@@ -78,7 +77,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      products: "getProducts"
+      products: "getCartItems"
     }),
     grandTotal() {
       return this.products.reduce((total, product) => {
@@ -87,9 +86,15 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["removeProduct"]),
+    ...mapActions(["removeCartItem", "addItemQuantity", "removeItemQuantity"]),
     remove(index) {
-      this.removeProduct(index);
+      this.removeCartItem(index);
+    },
+    plus(index) {
+      this.addItemQuantity(index);
+    },
+    minus(index) {
+      this.removeItemQuantity(index);
     }
   }
 };

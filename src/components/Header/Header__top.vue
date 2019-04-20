@@ -62,11 +62,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      products: "getProducts"
+      items: "getCartItems"
     }),
     cartLength() {
-      return this.products.reduce((length, product) => {
-        return length + product.quantity;
+      return this.items.reduce((length, item) => {
+        return length + item.quantity;
       }, 0);
     }
   }

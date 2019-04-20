@@ -1,5 +1,5 @@
 const state = {
-  products: [
+  items: [
     {
       image: "http://35.244.219.12/custom-kit1.jpg",
       product: "Custom Kit 1",
@@ -22,18 +22,41 @@ const state = {
 };
 
 const getters = {
-  getProducts: state => state.products
+  getCartItems: state => state.items
 };
 
 const actions = {
-  removeProduct: (context, index) => {
+  addCartItem: (context, product) => {
+    product.quantity = 1;
+    context.commit("ADD_TO_CART", product);
+  },
+  removeCartItem: (context, index) => {
     context.commit("REMOVE_FROM_CART", index);
+  },
+  addItemQuantity: (context, index) => {
+    context.commit("ADD_ITEM_QUANTITY", index);
+  },
+  removeItemQuantity: (context, index) => {
+    if (state.items[index].quantity == 1) {
+      context.commit("REMOVE_FROM_CART", index);
+    } else {
+      context.commit("REMOVE_ITEM_QUANTITY", index);
+    }
   }
 };
 
 const mutations = {
+  ADD_TO_CART: (state, product) => {
+    state.items.push(product);
+  },
   REMOVE_FROM_CART: (state, index) => {
-    state.products.splice(index, 1);
+    state.items.splice(index, 1);
+  },
+  ADD_ITEM_QUANTITY: (state, index) => {
+    state.items[index].quantity += 1;
+  },
+  REMOVE_ITEM_QUANTITY: (state, index) => {
+    state.items[index].quantity -= 1;
   }
 };
 

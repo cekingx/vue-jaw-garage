@@ -29,6 +29,11 @@ library.add(
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
+Vue.filter("currency", value => {
+  let val = (value / 1).toFixed(2).replace(".", ",");
+  return "IDR " + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+});
+
 Vue.config.productionTip = false;
 
 new Vue({
