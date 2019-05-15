@@ -20,7 +20,9 @@
         <div class="col-6 col-md-4 order-3 order-md-3 text-right" v-if="auth == true">
           <right-stuff></right-stuff>
         </div>
-        <div class="col-6 col-md-4 order-3 order-md-3 text-right" v-else>login</div>
+        <div class="col-6 col-md-4 order-3 order-md-3 text-right" v-else>
+          <router-link to="/login" class="btn btn-primary white">LOGIN</router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -53,5 +55,8 @@ export default {
 img {
   max-width: 75%;
   max-height: 75%;
+}
+.white {
+  color: white;
 }
 </style>

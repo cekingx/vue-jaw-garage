@@ -27,7 +27,7 @@
       <label for="inputPassword">Password</label>
     </div>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" @click="login">Sign in</button>
 
     <div class="text-center mt-2">
       <p>or</p>
@@ -38,8 +38,13 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
-  name: "Login"
+  name: "Login",
+  methods: {
+    ...mapActions(["login", "logout"])
+  }
 };
 </script>
 

@@ -55,7 +55,10 @@
 
               <div class="row">
                 <div class="col-md-12">
-                  <button class="btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</button>
+                  <router-link
+                    to="/checkout"
+                    class="btn btn-primary btn-lg py-3 btn-block"
+                  >Proceed To Checkout</router-link>
                 </div>
               </div>
             </div>

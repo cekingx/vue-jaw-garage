@@ -1,13 +1,18 @@
+import router from "../../router";
+
 const state = {
   user: {
-    isAuthenticated: true
+    isAuthenticated: false
   }
 };
 const getters = {
   getUserAuthStatus: state => state.user.isAuthenticated
 };
 const actions = {
-  login: context => context.commit("LOGIN"),
+  login: context => {
+    context.commit("LOGIN");
+    router.push("/");
+  },
   logout: context => context.commit("LOGOUT")
 };
 
