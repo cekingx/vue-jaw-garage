@@ -6,8 +6,19 @@ const state = {
 const getters = {
   getUserAuthStatus: state => state.user.isAuthenticated
 };
-const actions = {};
-const mutations = {};
+const actions = {
+  login: context => context.commit("LOGIN"),
+  logout: context => context.commit("LOGOUT")
+};
+
+const mutations = {
+  LOGIN: state => {
+    state.user.isAuthenticated = true;
+  },
+  LOGOUT: state => {
+    state.user.isAuthenticated = false;
+  }
+};
 
 export default {
   state,
