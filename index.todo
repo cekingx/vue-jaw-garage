@@ -1,10 +1,13 @@
 Projects:
 
   Auth: 
-    [ ] Cincang tampilan login dan register @1h @started(19-05-13 23:08) @high 
-    [ ] Route ke login @30m
     [ ] Auth state @2h
+  Checkout:
+    [ ] Thankyou page @30m
 
 Archive:
-  ✔ Cincang Shopper @2h @started(19-05-13 21:53) @done(19-05-13 22:50) @lasted(57m57s) @project(Projects.Checkout)
+  [+] Buat tampilan login @1h @started(19-05-15 17:49) @done(19-05-15 21:34) @lasted(3h45m17s) @project(Projects.Auth)
+  [+] Buat tampilan register @1h @done(19-05-15 21:34) @project(Projects.Auth)
+  [+] Route ke login @30m @done(19-05-15 13:00) @project(Projects.Auth)
+  [+] Cincang Shopper @2h @started(19-05-13 21:53) @project(Projects.Checkout) @done(19-05-15 13:01) @lasted(1d15h8m45s)
   
