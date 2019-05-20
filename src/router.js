@@ -6,10 +6,11 @@ import Product from "../src/components/Product/Product";
 import Checkout from "../src/components/Checkout/Checkout";
 import Login from "../src/components/LoginRegister/Login";
 import Register from "../src/components/LoginRegister/Register";
+import store from "./store/index";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -21,7 +22,10 @@ export default new Router({
     {
       path: "/cart",
       name: "cart",
-      component: Cart
+      component: Cart,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/product",
@@ -31,7 +35,10 @@ export default new Router({
     {
       path: "/checkout",
       name: "checkout",
-      component: Checkout
+      component: Checkout,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/login",
@@ -42,6 +49,27 @@ export default new Router({
       path: "/register",
       name: "register",
       component: Register
+    },
+    {
+      path: "*",
+      redirect: "/"
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.getIsEmailVerified == false) {
+      next("/register"); // UBAH NE
+      return;
+    } else if (localStorage.getItem("token") != null) {
+      next();
+      return;
+    }
+    next("/login");
+  } else {
+    next();
+  }
+});
+
+export default router;

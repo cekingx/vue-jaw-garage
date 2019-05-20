@@ -3,14 +3,19 @@ import axios from "axios";
 
 const state = {
   user: {
-    isAuthenticated: false,
-    name: "User"
+    token: localStorage.getItem("token") || null,
+    isEmailVerified: false,
+    name: localStorage.getItem("name") || "User"
   }
 };
+
 const getters = {
+  getToken: state => state.user.token,
   getUserAuthStatus: state => state.user.isAuthenticated,
-  getUserName: state => state.user.name
+  getUserName: state => state.user.name,
+  getIsEmailVerified: state => state.user.isEmailVerified
 };
+
 const actions = {
   register: (context, user) => {
     axios
@@ -22,7 +27,15 @@ const actions = {
         c_password: user.c_password
       })
       .then(response => {
-        context.commit("REGISTER", response.data.success.name);
+        let token = response.data.success.token;
+        let name = response.data.success.name;
+        localStorage.setItem("token", token);
+        localStorage.setItem("name", name);
+        axios.defaults.headers.common["Authorization"] = token;
+
+        context.commit("TOKEN", token);
+        context.commit("NAME", name);
+        context.commit("VERIFIED", response.data.success.isEmailVerified);
         router.push("/");
       })
       .catch(error => {
@@ -36,27 +49,40 @@ const actions = {
         password: user.password
       })
       .then(response => {
-        context.commit("LOGIN", response.data.success.name);
+        let token = response.data.success.token;
+        let name = response.data.success.name;
+        localStorage.setItem("token", token);
+        localStorage.setItem("name", name);
+        axios.defaults.headers.common["Authorization"] = token;
+
+        context.commit("TOKEN", token);
+        context.commit("NAME", name);
+        context.commit("VERIFIED", response.data.success.isEmailVerified);
         router.push("/");
       })
       .catch(error => {
         alert(error);
       });
   },
-  logout: context => context.commit("LOGOUT")
+  logout: context => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    delete axios.defaults.headers.common["Authorization"];
+
+    context.commit("VERIFIED", false);
+    router.go("/");
+  }
 };
 
 const mutations = {
-  LOGIN: (state, name) => {
-    state.user.isAuthenticated = true;
-    state.user.name = name;
+  NAME: (state, data) => {
+    state.user.name = data;
   },
-  LOGOUT: state => {
-    state.user.isAuthenticated = false;
+  VERIFIED: (state, data) => {
+    state.user.isEmailVerified = data;
   },
-  REGISTER: (state, name) => {
-    state.user.isAuthenticated = true;
-    state.user.name = name;
+  TOKEN: (state, data) => {
+    state.user.token = data;
   }
 };
 

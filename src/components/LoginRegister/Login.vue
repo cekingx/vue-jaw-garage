@@ -44,7 +44,10 @@
 </template>
 
 <script>
+// @click.prevent="() => login(user)"
+// @click.prevent="test"
 import { mapActions } from "vuex";
+import axios from "axios";
 
 export default {
   name: "Login",
@@ -57,7 +60,20 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["login"])
+    ...mapActions(["login"]),
+    test() {
+      axios
+        .post("http://127.0.0.1:8000/api/login", {
+          email: this.user.email,
+          password: this.user.password
+        })
+        .then(response => {
+          console.log(response.data.success);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   }
 };
 </script>
