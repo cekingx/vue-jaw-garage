@@ -23,9 +23,20 @@
 <script>
 import ProductItem from "./Product__item";
 import { mapGetters, mapActions } from "vuex";
+import axios from "axios";
 
 export default {
   name: "Product",
+  created() {
+    axios
+      .get("http://127.0.0.1:8000/api/product")
+      .then(response => {
+        this.requestProduct(response.data);
+      })
+      .catch(error => {
+        alert(error);
+      });
+  },
   components: {
     "product-item": ProductItem
   },
@@ -36,7 +47,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      addToCart: "addCartItem"
+      addToCart: "addCartItem",
+      requestProduct: "product"
     })
   }
 };

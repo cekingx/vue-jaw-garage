@@ -12,7 +12,7 @@
         placeholder="Name"
         required
         autofocus
-        v-model="name"
+        v-model="user.name"
       >
       <label for="inputNama">Name</label>
     </div>
@@ -24,7 +24,7 @@
         class="form-control"
         placeholder="Email address"
         required
-        v-model="email"
+        v-model="user.email"
       >
       <label for="inputEmail">Email address</label>
     </div>
@@ -36,7 +36,7 @@
         class="form-control"
         placeholder="Status"
         required
-        v-model="status"
+        v-model="user.status"
       >
       <label for="inputStatus">Status</label>
     </div>
@@ -48,7 +48,7 @@
         class="form-control"
         placeholder="Password"
         required
-        v-model="password"
+        v-model="user.password"
       >
       <label for="inputPassword">Password</label>
     </div>
@@ -60,12 +60,16 @@
         class="form-control"
         placeholder="Confirm Password"
         required
-        v-model="c_password"
+        v-model="user.c_password"
       >
       <label for="confirmInputPassword">Confirm Password</label>
     </div>
 
-    <button class="btn btn-lg btn-danger btn-block" type="submit" @click="sendRequest">Sign Up</button>
+    <button
+      class="btn btn-lg btn-danger btn-block"
+      type="submit"
+      @click.prevent="() => register(user)"
+    >Sign Up</button>
 
     <div class="text-center mt-2">
       <p>or</p>
@@ -77,7 +81,9 @@
 
 <script>
 import axios from "axios";
+import { mapActions } from "vuex";
 
+/*eslint-disable*/
 export default {
   name: "Register",
   mounted() {
@@ -85,40 +91,17 @@ export default {
   },
   data() {
     return {
-      name: "",
-      email: "",
-      status: "",
-      password: "",
-      c_password: ""
+      user: {
+        name: "",
+        email: "",
+        status: "",
+        password: "",
+        c_password: ""
+      }
     };
   },
   methods: {
-    sendRequest(e) {
-      e.preventDefault();
-
-      // let data = {
-      //   name: this.name,
-      //   email: this.email,
-      //   status: this.status,
-      //   password: this.password,
-      //   c_password: this.c_password
-      // };
-      axios
-        .post("http://127.0.0.1:8000/api/register", {
-          name: this.name,
-          email: this.email,
-          status: this.status,
-          password: this.password,
-          c_password: this.c_password
-        })
-        .then(response => {
-          console.log(response);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-      // console.log(data);
-    }
+    ...mapActions(["register"])
   }
 };
 </script>

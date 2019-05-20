@@ -12,6 +12,7 @@
         placeholder="Email address"
         required
         autofocus
+        v-model="user.email"
       >
       <label for="inputEmail">Email address</label>
     </div>
@@ -23,11 +24,16 @@
         class="form-control"
         placeholder="Password"
         required
+        v-model="user.password"
       >
       <label for="inputPassword">Password</label>
     </div>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit" @click="login">Sign in</button>
+    <button
+      class="btn btn-lg btn-primary btn-block"
+      type="submit"
+      @click.prevent="() => login(user)"
+    >Sign in</button>
 
     <div class="text-center mt-2">
       <p>or</p>
@@ -42,8 +48,16 @@ import { mapActions } from "vuex";
 
 export default {
   name: "Login",
+  data() {
+    return {
+      user: {
+        email: "",
+        password: ""
+      }
+    };
+  },
   methods: {
-    ...mapActions(["login", "logout"])
+    ...mapActions(["login"])
   }
 };
 </script>
