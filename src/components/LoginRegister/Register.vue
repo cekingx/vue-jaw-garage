@@ -6,14 +6,39 @@
 
     <div class="form-label-group">
       <input
+        type="text"
+        id="inputNama"
+        class="form-control"
+        placeholder="Name"
+        required
+        autofocus
+        v-model="name"
+      >
+      <label for="inputNama">Name</label>
+    </div>
+
+    <div class="form-label-group">
+      <input
         type="email"
         id="inputEmail"
         class="form-control"
         placeholder="Email address"
         required
-        autofocus
+        v-model="email"
       >
       <label for="inputEmail">Email address</label>
+    </div>
+
+    <div class="form-label-group">
+      <input
+        type="text"
+        id="inputStatus"
+        class="form-control"
+        placeholder="Status"
+        required
+        v-model="status"
+      >
+      <label for="inputStatus">Status</label>
     </div>
 
     <div class="form-label-group">
@@ -23,6 +48,7 @@
         class="form-control"
         placeholder="Password"
         required
+        v-model="password"
       >
       <label for="inputPassword">Password</label>
     </div>
@@ -34,23 +60,66 @@
         class="form-control"
         placeholder="Confirm Password"
         required
+        v-model="c_password"
       >
       <label for="confirmInputPassword">Confirm Password</label>
     </div>
 
-    <button class="btn btn-lg btn-danger btn-block" type="submit">Sign Up</button>
+    <button class="btn btn-lg btn-danger btn-block" type="submit" @click="sendRequest">Sign Up</button>
 
     <div class="text-center mt-2">
       <p>or</p>
     </div>
 
-    <router-link to="/Login" class="btn btn-lg btn btn-outline-primary btn-block">Sign In</router-link>
+    <router-link to="/login" class="btn btn-lg btn btn-outline-primary btn-block">Sign In</router-link>
   </form>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "Login"
+  name: "Register",
+  mounted() {
+    console.log("Component mounted.");
+  },
+  data() {
+    return {
+      name: "",
+      email: "",
+      status: "",
+      password: "",
+      c_password: ""
+    };
+  },
+  methods: {
+    sendRequest(e) {
+      e.preventDefault();
+
+      // let data = {
+      //   name: this.name,
+      //   email: this.email,
+      //   status: this.status,
+      //   password: this.password,
+      //   c_password: this.c_password
+      // };
+      axios
+        .post("http://127.0.0.1:8000/api/register", {
+          name: this.name,
+          email: this.email,
+          status: this.status,
+          password: this.password,
+          c_password: this.c_password
+        })
+        .then(response => {
+          console.log(response);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      // console.log(data);
+    }
+  }
 };
 </script>
 

@@ -2,6 +2,8 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store/index";
+import VueAxios from "vue-axios";
+import axios from "axios";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -28,6 +30,8 @@ library.add(
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
+
+Vue.use(VueAxios, axios);
 
 Vue.filter("currency", value => {
   let val = (value / 1).toFixed(2).replace(".", ",");
