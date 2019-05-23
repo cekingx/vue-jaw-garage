@@ -4,6 +4,7 @@ import todos from "./modules/todos";
 import cart from "./modules/cart";
 import product from "./modules/product";
 import auth from "./modules/auth";
+import checkout from "./modules/checkout";
 
 Vue.use(Vuex);
 
@@ -12,7 +13,8 @@ const store = new Vuex.Store({
     todos,
     cart,
     product,
-    auth
+    auth,
+    checkout
   }
 });
 

@@ -4,18 +4,21 @@ const state = {
       image: "http://35.244.219.12/custom-kit1.jpg",
       product: "Custom Kit 1",
       price: 200,
+      weight: 1000,
       quantity: 2
     },
     {
       image: "http://35.244.219.12/jok-spatbor.jpg",
       product: "Jok custom",
       price: 300,
+      weight: 1000,
       quantity: 1
     },
     {
       image: "http://35.244.219.12/jok-spatbor.jpg",
       product: "Jok custom 2",
       price: 300,
+      weight: 1000,
       quantity: 1
     }
   ]

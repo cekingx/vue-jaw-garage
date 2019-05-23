@@ -6,6 +6,9 @@ import Product from "../src/components/Product/Product";
 import Checkout from "../src/components/Checkout/Checkout";
 import Login from "../src/components/LoginRegister/Login";
 import Register from "../src/components/LoginRegister/Register";
+import ThankYou from "../src/components/ThankYou/ThankYou";
+import VerifyEmail from "../src/components/VerifyEmail/VerifyEmail";
+
 import store from "./store/index";
 
 Vue.use(Router);
@@ -35,10 +38,10 @@ const router = new Router({
     {
       path: "/checkout",
       name: "checkout",
-      component: Checkout,
-      meta: {
-        requiresAuth: true
-      }
+      component: Checkout
+      // meta: {
+      //   requiresAuth: true
+      // }
     },
     {
       path: "/login",
@@ -51,6 +54,16 @@ const router = new Router({
       component: Register
     },
     {
+      path: "/thankyou",
+      name: "thankyou",
+      component: ThankYou
+    },
+    {
+      path: "/verifyemail",
+      name: "verifyemail",
+      component: VerifyEmail
+    },
+    {
       path: "*",
       redirect: "/"
     }
@@ -60,7 +73,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (store.getters.getIsEmailVerified == false) {
-      next("/register"); // UBAH NE
+      next("/verifyemail"); // UBAH NE
       return;
     } else if (localStorage.getItem("token") != null) {
       next();

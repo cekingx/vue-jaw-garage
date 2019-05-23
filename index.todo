@@ -1,11 +1,11 @@
-Projects:
-
-  Auth: 
-    [ ] Auth state @2h 
-  Checkout:
-    [ ] Thankyou page @30m
+Project:
+  [ ] rootState @high 
+  [ ] Halaman transaksi
 
 Archive:
+  [-] Route with props @1h @started(19-05-21 15:11) @cancelled(19-05-21 16:56) @wasted(1h45m23s) @project(Projects.Login)
+  [+] Thankyou page @30m @done(19-05-21 18:34) @project(Projects.Checkout)
+  [+] Auth state @2h @done(19-05-21 14:13) @project(Projects.Auth)
   [+] Buat tampilan login @1h @started(19-05-15 17:49) @done(19-05-15 21:34) @lasted(3h45m17s) @project(Projects.Auth)
   [+] Buat tampilan register @1h @done(19-05-15 21:34) @project(Projects.Auth)
   [+] Route ke login @30m @done(19-05-15 13:00) @project(Projects.Auth)

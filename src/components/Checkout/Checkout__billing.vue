@@ -27,6 +27,23 @@
       </div>
 
       <div class="form-group row">
+        <div class="col-md-6">
+          <label for="c_email_address" class="text-black">
+            Email Address
+            <span class="text-danger">*</span>
+          </label>
+          <input type="text" class="form-control" id="c_email_address" name="c_email_address">
+        </div>
+        <div class="col-md-6">
+          <label for="c_phone" class="text-black">
+            Phone
+            <span class="text-danger">*</span>
+          </label>
+          <input type="text" class="form-control" id="c_phone" name="c_phone">
+        </div>
+      </div>
+
+      <div class="form-group row">
         <div class="col-md-12">
           <label for="c_address" class="text-black">
             Address
@@ -51,42 +68,50 @@
       </div>
 
       <div class="form-group row">
-        <div class="col-md-6">
-          <label for="c_state_country" class="text-black">
-            State / Country
+        <div class="col-md-12">
+          <label class="text-black">
+            Province
             <span class="text-danger">*</span>
           </label>
-          <input type="text" class="form-control" id="c_state_country" name="c_state_country">
-        </div>
-        <div class="col-md-6">
-          <label for="c_postal_zip" class="text-black">
-            Posta / Zip
-            <span class="text-danger">*</span>
-          </label>
-          <input type="text" class="form-control" id="c_postal_zip" name="c_postal_zip">
+          <multiselect
+            deselect-label="Can't remove this value"
+            :track-by="'province_id'"
+            :label="'province'"
+            placeholder="Select one"
+            :value="provinceValue"
+            :options="provinceOptions"
+            :searchable="false"
+            :allow-empty="false"
+            @input="updateProvinceValueAction"
+          >
+            <template slot="singleLabel" slot-scope="{ option }">
+              <strong>{{ option.province }}</strong>
+            </template>
+          </multiselect>
         </div>
       </div>
 
-      <div class="form-group row mb-5">
-        <div class="col-md-6">
-          <label for="c_email_address" class="text-black">
-            Email Address
+      <div class="form-group row">
+        <div class="col-md-12">
+          <label class="text-black">
+            City
             <span class="text-danger">*</span>
           </label>
-          <input type="text" class="form-control" id="c_email_address" name="c_email_address">
-        </div>
-        <div class="col-md-6">
-          <label for="c_phone" class="text-black">
-            Phone
-            <span class="text-danger">*</span>
-          </label>
-          <input
-            type="text"
-            class="form-control"
-            id="c_phone"
-            name="c_phone"
-            placeholder="Phone Number"
+          <multiselect
+            deselect-label="Can't remove this value"
+            :track-by="'city_id'"
+            :label="'city_name'"
+            placeholder="Select one"
+            :value="cityValue"
+            :options="cityOptions"
+            :searchable="false"
+            :allow-empty="false"
+            @input="updateCityValueAction"
           >
+            <template slot="singleLabel" slot-scope="{ option }">
+              <strong>{{ option.city_name }}</strong>
+            </template>
+          </multiselect>
         </div>
       </div>
 
@@ -106,8 +131,60 @@
 </template>
 
 <script>
+import Multiselect from "vue-multiselect";
+import Axios from "axios";
+import { mapState, mapActions, mapGetters } from "vuex";
+
 export default {
-  name: "Checkout Billing"
+  name: "CheckoutBilling",
+  components: {
+    Multiselect
+  },
+  computed: {
+    ...mapState({
+      // provinceValueName: state => state.checkout.provinceValue.province,
+      // provinceValueID: state => state.checkout.provinceValue.province_id,
+      provinceValue: state => state.checkout.address.provinceValue,
+      provinceOptions: state => state.checkout.address.provinceOptions,
+      cityValue: state => state.checkout.address.cityValue,
+      cityOptions: state => state.checkout.address.cityOptions
+    })
+  },
+  watch: {
+    provinceValue: function(value) {
+      Axios.post("http://127.0.0.1:8000/api/get-city", {
+        province_id: this.provinceValue.province_id
+      })
+        .then(response => {
+          console.log(response);
+          this.setCityOptionsAction(response.data.rajaongkir.results);
+        })
+        .catch(error => {
+          alert("error from set city" + error);
+        });
+    }
+  },
+  methods: {
+    ...mapActions([
+      "updateProvinceValueAction",
+      "setProvinceOptionsAction",
+      "updateCityValueAction",
+      "setCityOptionsAction"
+    ]),
+    logg: value => {
+      console.log(value);
+    }
+  },
+  created() {
+    Axios.get("http://127.0.0.1:8000/api/get-province")
+      .then(response => {
+        console.log(response);
+        this.setProvinceOptionsAction(response.data.rajaongkir.results);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 };
 </script>
 

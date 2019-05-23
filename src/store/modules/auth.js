@@ -4,7 +4,7 @@ import axios from "axios";
 const state = {
   user: {
     token: localStorage.getItem("token") || null,
-    isEmailVerified: false,
+    isEmailVerified: null,
     name: localStorage.getItem("name") || "User"
   }
 };

@@ -1,37 +1,65 @@
 <template>
-  <table class="table site-block-order-table mb-5">
-    <thead>
-      <th>Product</th>
-      <th>Total</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          Top Up T-Shirt
-          <strong class="mx-2">x</strong> 1
-        </td>
-        <td>$250.00</td>
-      </tr>
-      <tr>
-        <td>
-          Polo Shirt
-          <strong class="mx-2">x</strong> 1
-        </td>
-        <td>$100.00</td>
-      </tr>
-      <tr>
-        <td class="text-black font-weight-bold">
-          <strong>Cart Subtotal</strong>
-        </td>
-        <td class="text-black">$350.00</td>
-      </tr>
-    </tbody>
-  </table>
+  <div>
+    <div class="row mx-0">
+      <div class="btn-group col-12 px-0" role="group" aria-label="Basic example">
+        <button
+          type="button"
+          class="btn btn-primary col-4"
+          @click="() => setProvider(jne.provider, jne.tarif)"
+        >JNE</button>
+        <button
+          type="button"
+          class="btn btn-primary col-4"
+          @click="() => setProvider(jdt.provider, jdt.tarif)"
+        >TIKI</button>
+        <button
+          type="button"
+          class="btn btn-primary col-4"
+          @click="() => setProvider(pos.provider, pos.tarif)"
+        >POS</button>
+      </div>
+      <table class="table site-block-order-table" v-if="provider != null">
+        <thead>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{provider}}</td>
+            <td align="right">{{tarif | currency}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "Courier"
+  name: "Courier",
+  data() {
+    return {
+      provider: null,
+      tarif: null,
+      jne: {
+        provider: "JNE",
+        tarif: 30000
+      },
+      jdt: {
+        provider: "j&T",
+        tarif: 29000
+      },
+      pos: {
+        provider: "POS",
+        tarif: 30000
+      }
+    };
+  },
+  methods: {
+    setProvider(provider, tarif) {
+      (this.provider = provider), (this.tarif = tarif);
+    }
+  }
 };
 </script>
 

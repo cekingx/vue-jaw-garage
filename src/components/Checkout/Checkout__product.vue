@@ -5,33 +5,42 @@
       <th>Total</th>
     </thead>
     <tbody>
-      <tr>
-        <td>
-          Top Up T-Shirt
-          <strong class="mx-2">x</strong> 1
-        </td>
-        <td>$250.00</td>
-      </tr>
-      <tr>
-        <td>
-          Polo Shirt
-          <strong class="mx-2">x</strong> 1
-        </td>
-        <td>$100.00</td>
-      </tr>
+      <checkout-product-item
+        v-for="(product, index) in products"
+        :key="index"
+        :name="product.product"
+        :price="product.price"
+        :quantity="product.quantity"
+      />
       <tr>
         <td class="text-black font-weight-bold">
           <strong>Cart Subtotal</strong>
         </td>
-        <td class="text-black">$350.00</td>
+        <td align="right" class="text-black">{{ cartSubTotal | currency }}</td>
       </tr>
     </tbody>
   </table>
 </template>
 
 <script>
+import CheckoutProductItem from "./Checkout__product__item";
+import { mapGetters } from "vuex";
+
 export default {
-  name: "Product Checkout"
+  name: "ProductCheckout",
+  components: {
+    "checkout-product-item": CheckoutProductItem
+  },
+  computed: {
+    ...mapGetters({
+      products: "getCartItems"
+    }),
+    cartSubTotal() {
+      return this.products.reduce((total, product) => {
+        return total + product.quantity * product.price;
+      }, 0);
+    }
+  }
 };
 </script>
 

@@ -17,14 +17,17 @@
                       <td class="text-black font-weight-bold">
                         <strong>Order Total</strong>
                       </td>
-                      <td class="text-black font-weight-bold">
+                      <td align="right" class="text-black font-weight-bold">
                         <strong>$350.00</strong>
                       </td>
                     </tr>
                   </tbody>
                 </table>
                 <div class="form-group">
-                  <button class="btn btn-primary btn-lg py-3 btn-block">Place Order</button>
+                  <router-link
+                    to="/thankyou"
+                    class="btn btn-primary btn-lg py-3 btn-block"
+                  >Place Order</router-link>
                 </div>
               </div>
             </div>
