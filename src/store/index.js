@@ -5,6 +5,7 @@ import cart from "./modules/cart";
 import product from "./modules/product";
 import auth from "./modules/auth";
 import checkout from "./modules/checkout";
+import transaction from "./modules/transaction";
 
 Vue.use(Vuex);
 
@@ -14,7 +15,8 @@ const store = new Vuex.Store({
     cart,
     product,
     auth,
-    checkout
+    checkout,
+    transaction
   }
 });
 

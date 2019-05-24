@@ -8,6 +8,7 @@ import Login from "../src/components/LoginRegister/Login";
 import Register from "../src/components/LoginRegister/Register";
 import ThankYou from "../src/components/ThankYou/ThankYou";
 import VerifyEmail from "../src/components/VerifyEmail/VerifyEmail";
+import Transaction from "./components/Transaction/Transaction";
 
 import store from "./store/index";
 
@@ -25,10 +26,10 @@ const router = new Router({
     {
       path: "/cart",
       name: "cart",
-      component: Cart,
-      meta: {
-        requiresAuth: true
-      }
+      component: Cart
+      // meta: {
+      //   requiresAuth: true
+      // }
     },
     {
       path: "/product",
@@ -62,6 +63,11 @@ const router = new Router({
       path: "/verifyemail",
       name: "verifyemail",
       component: VerifyEmail
+    },
+    {
+      path: "/transaction",
+      name: "transaction",
+      component: Transaction
     },
     {
       path: "*",

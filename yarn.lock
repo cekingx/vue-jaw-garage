@@ -669,6 +669,11 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
+"@chenfengyuan/vue-countdown@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@chenfengyuan/vue-countdown/-/vue-countdown-1.1.2.tgz#bf6fedbf26a410f5277d7bcb553939eb9565fd88"
+  integrity sha512-krPaKJvFs7ek4P1zTvg/LXrB3w5gmmNn2BZoBzeyg7H5S7h+03iwKm1MXrVvfA/jNV0FpkUacPVOQQTTe4I4Aw==
+
 "@fortawesome/fontawesome-common-types@^0.2.17":
   version "0.2.17"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.17.tgz#d8c36e6f6f3b3415fa1f83eaffe4f41bd313715c"

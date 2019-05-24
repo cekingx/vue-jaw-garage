@@ -14,7 +14,8 @@ import {
   faMapMarkedAlt,
   faTruck,
   faUndo,
-  faQuestionCircle
+  faQuestionCircle,
+  faCreditCard
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -26,7 +27,8 @@ library.add(
   faMapMarkedAlt,
   faTruck,
   faUndo,
-  faQuestionCircle
+  faQuestionCircle,
+  faCreditCard
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
